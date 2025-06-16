@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>GBAS</title>
+
+		<!-- Security & SSL Meta Tags -->
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:; img-src 'self' data: https: blob:;"
+		/>
+		<meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains" />
+		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+		<meta http-equiv="X-Frame-Options" content="DENY" />
+		<meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+		<link rel="icon" href="assets/Logo.svg" />
+
+		<!-- Preload Critical Resources -->
+		<link
+			rel="preload"
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
+			as="style"
+		/>
+
+		<!-- Tailwind CSS -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link href="https://unpkg.com/@flagpack/core/dist/flagpack.css" rel="stylesheet" />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+		/>
+		<link rel="stylesheet" href="style/styles.css" />
+		<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script>
+			emailjs.init("Vk38GRcu6-AGTVckN"); // ضع مفتاحك هنا
+		</script>
+	</head>
+	<body class="font-cairo">
+		<!-- Floating Contact Button -->
+		<button
+			id="floatingContact"
+			class="floating-contact w-16 h-16 rounded-full text-white flex items-center justify-center text-xl font-bold shadow-lg"
+		>
+			<i class="bi bi-chat-dots-fill"></i>
+		</button>
+
+		<!-- Navigation -->
+		<nav class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-40 border-b border-gray-100">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="flex justify-between w-full items-center h-20">
+					<!-- Logo -->
+					<div class="flex items-center">
+						<img
+							src="assets/Logo.svg"
+							alt="Global Business and Aviation Services"
+							class="h-12 w-auto"
+							loading="eager"
+						/>
+					</div>
+
+					<!-- Desktop Navigation -->
+					<div class="hidden lg:flex items-center space-x-8">
+						<a
+							href="#about"
+							class="nav-link text-brand-blue hover:text-brand-orange font-semibold py-2"
+							data-translate="nav-about"
+							>About Us</a
+						>
+						<a
+							href="#services"
+							class="nav-link text-brand-blue hover:text-brand-orange font-semibold py-2"
+							data-translate="nav-services"
+							>Services</a
+						>
+						<a
+							href="#finderjet"
+							class="nav-link text-brand-blue hover:text-brand-orange font-semibold py-2"
+							data-translate="nav-finderjet"
+							>FinderJet</a
+						>
+						<a
+							href="#news"
+							class="nav-link text-brand-blue hover:text-brand-orange font-semibold py-2"
+							data-translate="nav-news"
+							>News</a
+						>
+						<a
+							href="#contact"
+							class="nav-link text-brand-blue hover:text-brand-orange font-semibold py-2"
+							data-translate="nav-contact"
+							>Contact</a
+						>
+					</div>
+
+					<!-- Language Switcher & CTA -->
+					<div class="flex items-center space-x-6">
+						<!-- Language Switcher -->
+						<div class="relative">
+							<button
+								id="languageDropdown"
+								class="flex items-center space-x-2 text-brand-blue hover:text-brand-orange transition-colors bg-gray-50 px-4 py-2 rounded-lg border border-gray-200 hover:border-brand-orange"
+							>
+								<img class="flag-icon" src="assets/USA flag.svg" alt="" />
+								<span id="currentLang" class="font-semibold">EN</span>
+								<i class="bi bi-chevron-down text-xs"></i>
+							</button>
+							<div
+								id="languageMenu"
+								class="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-xl border border-gray-100 hidden overflow-hidden"
+							>
+								<a
+									href="#"
+									onclick="changeLanguage('en')"
+									class="flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+								>
+									<img class="flag-icon" src="assets/USA flag.svg" alt="" />
+									<span class="font-medium">English</span>
+								</a>
+								<a
+									href="#"
+									onclick="changeLanguage('ar')"
+									class="flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+								>
+									<img class="flag-icon" src="assets/KSA flag.svg" alt="" />
+									<span class="font-medium">العربية</span>
+								</a>
+								<a
+									href="#"
+									onclick="changeLanguage('es')"
+									class="flex items-center space-x-3 px-4 py-3 hover:bg-gray-50 transition-colors"
+								>
+									<img class="flag-icon" src="assets/SPAIN flag.svg" alt="" />
+									<span class="font-medium">Español</span>
+								</a>
+							</div>
+						</div>
+
+						<button
+							class="hidden lg:block bg-brand-orange text-white px-6 py-3 rounded-xl hover:bg-brand-orange-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+							data-translate="get-started"
+						>
+							Get Started
+						</button>
+					</div>
+
+					<!-- Mobile menu button -->
+					<div class="lg:hidden w-8">
+						<button id="mobileMenuBtn" class="text-brand-blue hover:text-brand-orange p-2">
+							<i class="bi bi-list text-2xl"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mobile Navigation -->
+			<div id="mobileMenu" class="lg:hidden hidden bg-white border-t border-gray-100">
+				<div class="px-4 py-6 space-y-4">
+					<a
+						href="#about"
+						class="block text-brand-blue hover:text-brand-orange font-semibold py-2 border-b border-gray-100"
+						data-translate="nav-about"
+						>About Us</a
+					>
+					<a
+						href="#services"
+						class="block text-brand-blue hover:text-brand-orange font-semibold py-2 border-b border-gray-100"
+						data-translate="nav-services"
+						>Services</a
+					>
+					<a
+						href="#news"
+						class="block text-brand-blue hover:text-brand-orange font-semibold py-2 border-b border-gray-100"
+						data-translate="nav-news"
+						>News</a
+					>
+					<a
+						href="#contact"
+						class="block text-brand-blue hover:text-brand-orange font-semibold py-2"
+						data-translate="nav-contact"
+						>Contact</a
+					>
+					<!-- Get Started Button for Mobile -->
+					<div class="pt-2">
+						<button
+							class="w-full bg-brand-orange text-white px-6 py-3 rounded-xl hover:bg-brand-orange-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+							data-translate="get-started"
+						>
+							Get Started
+						</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section class="hero-gradient text-white py-20 lg:py-32 relative overflow-hidden">
+			<!-- Background Elements -->
+			<div class="absolute inset-0 opacity-50">
+				<div class="absolute top-20 left-10 float-animation">
+					<i class="bi bi-airplane text-6xl text-brand-orange"></i>
+				</div>
+				<div class="absolute top-40 right-20 float-animation" style="animation-delay: 1s">
+					<i class="bi bi-building text-5xl text-brand-orange"></i>
+				</div>
+				<div class="absolute bottom-20 left-1/4 float-animation" style="animation-delay: 2s">
+					<i class="bi bi-gear text-4xl text-brand-orange"></i>
+				</div>
+			</div>
+
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+				<div class="grid lg:grid-cols-2 md:grid-cols-2 sm-md:grid-cols-1 sm:grid-cols-1 gap-12">
+					<div class="space-y-8">
+						<div class="space-y-6">
+							<h1
+								class="text-4xl lg:text-4xl font-bold leading-tight"
+								data-translate="hero-title"
+							>
+								Global Business and Aviation Services (GBAS) – Innovative Solutions for
+								the Future of Aviation and Business
+							</h1>
+
+							<p
+								class="text-base text-blue-100 leading-relaxed"
+								data-translate="hero-description"
+							>
+								At GBAS, we specialize in delivering integrated solutions that enhance
+								efficiency and customer experience for airlines, airports, hotels, and
+								other service facilities. From human resources management to advanced
+								technology solutions like FinderJet, along with consulting and training
+								services, we're here to support our partners in achieving excellence.
+							</p>
+
+							<p
+								class="text-lg text-brand-orange font-semibold"
+								data-translate="hero-cta-text"
+							>
+								Let's build a partnership that takes your business to new heights!
+							</p>
+						</div>
+
+						<div class="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-4">
+							<button
+								class="bg-brand-orange text-white px-8 py-4 rounded-xl hover:bg-brand-orange-light transition-all duration-300 font-semibold text-lg flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+							>
+								<i class="bi bi-compass mr-2"></i>
+								<span data-translate="discover-services">Discover Our Services</span>
+							</button>
+							<button
+								class="bg-brand-blue text-white px-8 py-4 rounded-xl hover:bg-brand-blue-light transition-all duration-300 font-semibold text-lg flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+							>
+								<i class="bi bi-telephone mr-2"></i>
+								<span data-translate="contact-us">Contact Us</span>
+							</button>
+						</div>
+					</div>
+
+					<div class="relative">
+						<div
+							class="bg-white/10 backdrop-blur-sm rounded-2xl lg:p-8 sm-md:p-6 sm:p-[16px] border border-white/20"
+						>
+							<div class="rounded-lg">
+								<img
+									src="assets/hero-img.png"
+									alt="Aviation Services Dashboard"
+									class="w-full h-full object-cover rounded-lg shadow-2xl"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- About Us Section -->
+		<section id="about" class="py-20 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<div
+						class="inline-flex items-center bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full mb-4"
+					>
+						<i class="bi bi-building mr-2"></i>
+						<span class="font-semibold" data-translate="about-badge">About GBAS</span>
+					</div>
+					<h2
+						class="text-4xl lg:text-5xl font-bold text-brand-blue mb-6"
+						data-translate="about-title"
+					>
+						About GBAS
+					</h2>
+				</div>
+
+				<div class="grid lg:grid-cols-2 gap-16 items-center">
+					<div class="space-y-8">
+						<div>
+							<p
+								class="text-xl text-gray-600 leading-relaxed mb-6"
+								data-translate="about-description"
+							>
+								Established in 2024 in Fairfax, Virginia, Global Business and Aviation
+								Services (GBAS) is dedicated to providing integrated solutions for
+								airlines, airports, hotels, and other service facilities. Our team
+								consists of ambitious young professionals and experts who blend a spirit
+								of innovation with deep expertise to help our partners achieve
+								excellence. We are committed to delivering services that enhance
+								efficiency and customer experience, whether you manage an airport, an
+								airline, a luxury hotel, or any other service facility.
+							</p>
+						</div>
+
+						<!-- Company Stats -->
+						<div class="grid grid-cols-2 gap-8">
+							<div>
+								<div
+									class="text-3xl font-bold text-brand-orange mb-2"
+									data-translate="about-stat-1"
+								>
+									2024
+								</div>
+								<div class="text-gray-600" data-translate="about-stat-1-label">
+									Established
+								</div>
+							</div>
+							<div>
+								<div
+									class="text-3xl font-bold text-brand-orange mb-2"
+									data-translate="about-stat-2"
+								>
+									Virginia
+								</div>
+								<div class="text-gray-600" data-translate="about-stat-2-label">
+									Headquarters
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="space-y-8">
+						<!-- Mission, Vision, Values -->
+						<div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+							<div class="space-y-6">
+								<div>
+									<h3
+										class="text-xl font-bold text-brand-blue mb-3 flex items-center"
+									>
+										<i class="bi bi-eye mr-2 text-brand-orange"></i>
+										<span data-translate="vision-title">Our Vision</span>
+									</h3>
+									<p class="text-gray-600" data-translate="vision-text">
+										To be the global first choice for airlines, airports,
+										hotels, and service industries.
+									</p>
+								</div>
+
+								<div>
+									<h3
+										class="text-xl font-bold text-brand-blue mb-3 flex items-center"
+									>
+										<i class="bi bi-target mr-2 text-brand-orange"></i>
+										<span data-translate="mission-title">Our Mission</span>
+									</h3>
+									<p class="text-gray-600" data-translate="mission-text">
+										To provide integrated and innovative solutions that drive
+										progress in aviation and business.
+									</p>
+								</div>
+
+								<div>
+									<h3
+										class="text-xl font-bold text-brand-blue mb-3 flex items-center"
+									>
+										<i class="bi bi-heart mr-2 text-brand-orange"></i>
+										<span data-translate="values-title">Our Values</span>
+									</h3>
+									<div class="space-y-3 text-gray-600">
+										<div class="flex items-start">
+											<i
+												class="bi bi-check-circle-fill text-brand-orange mr-3 mt-1"
+											></i>
+											<div>
+												<span
+													class="font-semibold"
+													data-translate="value-1-title"
+													>Professionalism:</span
+												>
+												<span data-translate="value-1-desc">
+													We are committed to the highest standards
+													of quality in all we do.</span
+												>
+											</div>
+										</div>
+										<div class="flex items-start">
+											<i
+												class="bi bi-check-circle-fill text-brand-orange mr-3 mt-1"
+											></i>
+											<div>
+												<span
+													class="font-semibold"
+													data-translate="value-2-title"
+													>Innovation:</span
+												>
+												<span data-translate="value-2-desc">
+													We invest in technology to develop
+													advanced solutions.</span
+												>
+											</div>
+										</div>
+										<div class="flex items-start">
+											<i
+												class="bi bi-check-circle-fill text-brand-orange mr-3 mt-1"
+											></i>
+											<div>
+												<span
+													class="font-semibold"
+													data-translate="value-3-title"
+													>Partnership:</span
+												>
+												<span data-translate="value-3-desc">
+													We build sustainable relationships with
+													our partners.</span
+												>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Services Section -->
+		<section id="services" class="py-20 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<div
+						class="inline-flex items-center bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full mb-4"
+					>
+						<i class="bi bi-gear-fill mr-2"></i>
+						<span class="font-semibold" data-translate="services-badge">Our Services</span>
+					</div>
+					<h2
+						class="text-4xl lg:text-5xl font-bold text-brand-blue mb-6"
+						data-translate="services-title"
+					>
+						Our Services
+					</h2>
+				</div>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 gap-8">
+					<!-- HR Management -->
+					<div
+						class="service-card bg-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100"
+					>
+						<div
+							class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mb-6"
+						>
+							<i class="bi bi-people-fill text-2xl text-brand-orange service-icon"></i>
+						</div>
+						<h3
+							class="text-xl font-bold text-brand-blue mb-4"
+							data-translate="service-hr-title"
+						>
+							Human Resources Management
+						</h3>
+						<p class="text-gray-600 mb-6" data-translate="service-hr-desc">
+							At GBAS, we take pride in offering innovative and comprehensive staffing
+							solutions tailored to meet the needs of airlines, airports, hotels, and
+							various other service facilities. We focus on providing highly skilled and
+							professionally trained teams to support your daily operations, significantly
+							enhancing the quality of customer service delivered. We are committed to
+							ensuring a seamless and efficient operational experience that exceeds our
+							partners' expectations, whether they operate in the fast-paced environment of
+							airports, airlines, luxury hotels, or other service sectors that demand
+							precision and professionalism.
+						</p>
+					</div>
+
+					<!-- Technical Solutions -->
+					<div
+						class="service-card bg-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100"
+					>
+						<div
+							class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mb-6"
+						>
+							<i class="bi bi-cpu-fill text-2xl text-brand-orange service-icon"></i>
+						</div>
+						<h3
+							class="text-xl font-bold text-brand-blue mb-4"
+							data-translate="service-tech-title"
+						>
+							<!-- Technology Solutions -->
+						</h3>
+						<p class="text-gray-600 mb-6" data-translate="service-tech-desc">
+							We develop advanced technology products to improve operations for airlines,
+							airports, hotels, and other service facilities. Our product FinderJet
+							revolutionizes lost and found management with high efficiency, supporting
+							airlines, airports, and hotels in delivering an exceptional customer
+							experience, while also serving a broader market of service facilities. We're
+							working on more innovative tech solutions to meet the needs of our partners
+							across various industries.
+						</p>
+					</div>
+
+					<!-- Consulting -->
+					<div
+						class="service-card bg-gray-50 rounded-2xl p-8 shadow-lg hover:shadow-xl border border-gray-100"
+					>
+						<div
+							class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mb-6"
+						>
+							<i class="bi bi-chat-dots-fill text-2xl text-brand-orange service-icon"></i>
+						</div>
+						<h3
+							class="text-xl font-bold text-brand-blue mb-4"
+							data-translate="service-consulting-title"
+						>
+							Consulting and Training
+						</h3>
+						<p class="text-gray-600 mb-6" data-translate="service-consulting-desc">
+							We design tailored training programs and provide specialized consulting to
+							enhance the performance of airlines, airports, hotels, and other service
+							sectors. Our expertise enables us to deliver practical and innovative
+							solutions, including training staff at airlines, airports, and hotels on using
+							our tech systems for maximum benefit.
+						</p>
+					</div>
+				</div>
+				<section id="finderjet" class="py-20 bg-gray-50">
+					<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+						<div class="text-center mb-16">
+							<div
+								class="inline-flex items-center bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full mb-4"
+							>
+								<i class="bi bi-search mr-2"></i>
+								<span class="font-semibold" data-translate="finderjet-badge"
+									>Featured Product</span
+								>
+							</div>
+							<h2
+								class="text-4xl lg:text-5xl font-bold text-brand-blue mb-6"
+								data-translate="finderjet-title"
+							>
+								FinderJet
+							</h2>
+							<p
+								class="text-xl text-gray-600 max-w-3xl mx-auto"
+								data-translate="finderjet-subtitle"
+							>
+								Revolutionary Lost and Found Management System for Airlines, Airports,
+								and Hotels
+							</p>
+						</div>
+
+						<div
+							class="grid lg:grid-cols-2 md:grid-cols-1 sm:grid-cols-1 gap-16 items-center mb-16"
+						>
+							<div class="space-y-8">
+								<div class="space-y-6">
+									<h3
+										class="text-3xl font-bold text-brand-blue"
+										data-translate="finderjet-main-title"
+									>
+										Transform Your Lost & Found Operations
+									</h3>
+									<p
+										class="text-lg text-gray-600 leading-relaxed"
+										data-translate="finderjet-description"
+									>
+										FinderJet is our flagship technology solution that
+										revolutionizes how airlines, airports, and hotels manage
+										lost and found items. With advanced tracking, automated
+										notifications, and seamless integration capabilities,
+										FinderJet significantly reduces processing time while
+										enhancing customer satisfaction.
+									</p>
+
+									<div class="space-y-4">
+										<div class="flex items-start space-x-4">
+											<div
+												class="w-8 h-8 bg-brand-orange/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+											>
+												<i
+													class="bi bi-lightning-fill text-brand-orange"
+												></i>
+											</div>
+											<div>
+												<h4
+													class="font-semibold text-brand-blue mb-1"
+													data-translate="finderjet-feature-1-title"
+												>
+													Instant Item Registration
+												</h4>
+												<p
+													class="text-gray-600"
+													data-translate="finderjet-feature-1-desc"
+												>
+													Quick and easy item logging with photo
+													capture and detailed descriptions
+												</p>
+											</div>
+										</div>
+
+										<div class="flex items-start space-x-4">
+											<div
+												class="w-8 h-8 bg-brand-orange/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+											>
+												<i
+													class="bi bi-bell-fill text-brand-orange"
+												></i>
+											</div>
+											<div>
+												<h4
+													class="font-semibold text-brand-blue mb-1"
+													data-translate="finderjet-feature-2-title"
+												>
+													Automated Notifications
+												</h4>
+												<p
+													class="text-gray-600"
+													data-translate="finderjet-feature-2-desc"
+												>
+													Smart matching system that automatically
+													notifies customers when their items are
+													found
+												</p>
+											</div>
+										</div>
+
+										<div class="flex items-start space-x-4">
+											<div
+												class="w-8 h-8 bg-brand-orange/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1"
+											>
+												<i class="bi bi-graph-up text-brand-orange"></i>
+											</div>
+											<div>
+												<h4
+													class="font-semibold text-brand-blue mb-1"
+													data-translate="finderjet-feature-3-title"
+												>
+													Analytics Dashboard
+												</h4>
+												<p
+													class="text-gray-600"
+													data-translate="finderjet-feature-3-desc"
+												>
+													Comprehensive reporting and analytics to
+													optimize your lost and found operations
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="relative">
+								<div
+									class="bg-white/10 backdrop-blur-sm rounded-2xl xl:p-8 sm:p-2 border border-white/20"
+								>
+									<div class="rounded-lg aspect-[1/1] sm:aspect-[4/3]">
+										<img
+											src="assets/finderjet.png"
+											alt="finderjet"
+											class="w-full h-full object-cover md:object-fill md:h-full md:mb-0 sm:object-fill object-top rounded-lg shadow-2xl"
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Industry Applications -->
+						<div class="grid md:grid-cols-3 gap-8">
+							<div
+								class="product-feature bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center"
+							>
+								<div
+									class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+								>
+									<i class="bi bi-airplane text-2xl text-brand-blue"></i>
+								</div>
+								<h4
+									class="text-xl font-bold text-brand-blue mb-4"
+									data-translate="finderjet-airlines-title"
+								>
+									Airlines
+								</h4>
+								<p class="text-gray-600" data-translate="finderjet-airlines-desc">
+									Streamline cabin crew workflows and passenger item recovery across
+									multiple flights and destinations
+								</p>
+							</div>
+
+							<div
+								class="product-feature bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center"
+							>
+								<div
+									class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+								>
+									<i class="bi bi-building text-2xl text-brand-blue"></i>
+								</div>
+								<h4
+									class="text-xl font-bold text-brand-blue mb-4"
+									data-translate="finderjet-airports-title"
+								>
+									Airports
+								</h4>
+								<p class="text-gray-600" data-translate="finderjet-airports-desc">
+									Manage terminal-wide lost items with real-time tracking and
+									automated passenger notifications
+								</p>
+							</div>
+
+							<div
+								class="product-feature bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center"
+							>
+								<div
+									class="w-16 h-16 bg-brand-blue/10 rounded-2xl flex items-center justify-center mx-auto mb-6"
+								>
+									<i class="bi bi-house-heart text-2xl text-brand-blue"></i>
+								</div>
+								<h4
+									class="text-xl font-bold text-brand-blue mb-4"
+									data-translate="finderjet-hotels-title"
+								>
+									Hotels
+								</h4>
+								<p class="text-gray-600" data-translate="finderjet-hotels-desc">
+									Enhance guest satisfaction with efficient room and facility lost
+									item management systems
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+
+		<!-- Company News Section -->
+		<section id="news" class="py-20 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<div
+						class="inline-flex items-center bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full mb-4"
+					>
+						<i class="bi bi-newspaper mr-2"></i>
+						<span class="font-semibold" data-translate="news-badge">Company News</span>
+					</div>
+					<h2
+						class="text-4xl lg:text-5xl font-bold text-brand-blue mb-6"
+						data-translate="news-title"
+					>
+						Company News
+					</h2>
+				</div>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-2 sm:grid-cols-1 gap-8 max-w-5xl mx-auto">
+					<!-- News Card 1 -->
+					<article class="news-card bg-white rounded-2xl shadow-lg border border-gray-100 group">
+						<div class="relative overflow-hidden rounded-t-2xl">
+							<div>
+								<img
+									src="assets/Launch of Global Business and Aviation Services .jpg"
+									alt="GBAS Launch"
+									class="w-full h-64 object-cover object-bottom news-image"
+								/>
+							</div>
+							<div class="absolute top-4 right-4">
+								<button
+									class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-brand-orange hover:bg-white transition-colors"
+								>
+									<i class="bi bi-bookmark"></i>
+								</button>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center text-gray-500 text-sm mb-3">
+								<i class="bi bi-calendar mr-2"></i>
+								<span data-translate="news-1-date">April 2024</span>
+							</div>
+							<h3
+								class="text-xl font-bold text-brand-blue mb-3 group-hover:text-brand-orange transition-colors"
+								data-translate="news-1-title"
+							>
+								Launch of Global Business and Aviation Services (GBAS)
+							</h3>
+							<p class="text-gray-600 mb-6" data-translate="news-1-excerpt">
+								We're excited to announce the launch of GBAS in 2024! We aim to deliver
+								integrated solutions for airlines, airports, hotels, and other service
+								facilities, focusing on enhancing operational efficiency and improving
+								customer experience. Follow us for the latest updates!
+							</p>
+							<div class="flex items-center justify-between">
+								<button
+									class="text-brand-orange font-semibold hover:text-brand-orange-light flex items-center group"
+								>
+									<span data-translate="read-more">Read More</span>
+									<i
+										class="bi bi-arrow-right ml-2 group-hover:translate-x-1 transition-transform"
+									></i>
+								</button>
+								<div class="flex items-center space-x-2">
+									<button
+										class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-brand-orange hover:text-white transition-colors"
+									>
+										<i class="bi bi-share text-xs"></i>
+									</button>
+									<button
+										class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-brand-orange hover:text-white transition-colors"
+									>
+										<i class="bi bi-heart text-xs"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</article>
+
+					<!-- News Card 2 -->
+					<article class="news-card bg-white rounded-2xl shadow-lg border border-gray-100 group">
+						<div class="relative overflow-hidden rounded-t-2xl">
+							<div>
+								<img
+									src="assets/A Bright Future with New Tech Solutions.jpg"
+									alt="Future Tech Solutions"
+									class="w-full h-64 object-cover object-top news-image"
+								/>
+							</div>
+							<div class="absolute top-4 right-4">
+								<button
+									class="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-brand-orange hover:bg-white transition-colors"
+								>
+									<i class="bi bi-bookmark"></i>
+								</button>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center text-gray-500 text-sm mb-3">
+								<i class="bi bi-calendar mr-2"></i>
+								<span data-translate="news-2-date">April 2025</span>
+							</div>
+							<h3
+								class="text-xl font-bold text-brand-blue mb-3 group-hover:text-brand-orange transition-colors"
+								data-translate="news-2-title"
+							>
+								A Bright Future with New Tech Solutions
+							</h3>
+							<p class="text-gray-600 mb-6" data-translate="news-2-excerpt">
+								We're currently developing a range of new technology products to support
+								our partners in airlines, airports, hotels, and other service
+								industries. Stay tuned for our upcoming launches that will boost
+								operational efficiency!
+							</p>
+							<div class="flex items-center justify-between">
+								<button
+									class="text-brand-orange font-semibold hover:text-brand-orange-light flex items-center group"
+								>
+									<span data-translate="read-more">Read More</span>
+									<i
+										class="bi bi-arrow-right ml-2 group-hover:translate-x-1 transition-transform"
+									></i>
+								</button>
+								<div class="flex items-center space-x-2">
+									<button
+										class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-brand-orange hover:text-white transition-colors"
+									>
+										<i class="bi bi-share text-xs"></i>
+									</button>
+									<button
+										class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-brand-orange hover:text-white transition-colors"
+									>
+										<i class="bi bi-heart text-xs"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-20 bg-white">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="text-center mb-16">
+					<div
+						class="inline-flex items-center bg-brand-orange/10 text-brand-orange px-4 py-2 rounded-full mb-4"
+					>
+						<i class="bi bi-envelope mr-2"></i>
+						<span class="font-semibold" data-translate="contact-badge">Contact Us</span>
+					</div>
+					<h2
+						class="text-4xl lg:text-5xl font-bold text-brand-blue mb-6"
+						data-translate="contact-title"
+					>
+						Be Our Partner in Success
+					</h2>
+					<p class="text-xl text-gray-600 max-w-3xl mx-auto" data-translate="contact-description">
+						Looking for integrated solutions to improve your operations? Contact GBAS to discuss
+						partnership opportunities, whether you're in airlines, airports, hotels, or other
+						service industries.
+					</p>
+				</div>
+
+				<div class="grid lg:grid-cols-2 gap-16">
+					<!-- Contact Information -->
+					<div class="space-y-8">
+						<div>
+							<h3
+								class="text-2xl font-bold text-brand-blue mb-6"
+								data-translate="contact-info-title"
+							>
+								Contact Information
+							</h3>
+							<div class="space-y-6">
+								<div class="flex items-start space-x-4">
+									<div
+										class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0"
+									>
+										<i
+											class="bi bi-envelope-fill text-brand-orange text-xl"
+										></i>
+									</div>
+									<div>
+										<h4
+											class="font-semibold text-brand-blue mb-1"
+											data-translate="email-label"
+										>
+											Email
+										</h4>
+										<p class="text-gray-600">info@gbasus.com</p>
+									</div>
+								</div>
+
+								<div class="flex items-start space-x-4">
+									<div
+										class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0"
+									>
+										<i class="bi bi-geo-alt-fill text-brand-orange text-xl"></i>
+									</div>
+									<div>
+										<h4
+											class="font-semibold text-brand-blue mb-1"
+											data-translate="address-label"
+										>
+											Address
+										</h4>
+										<p class="text-gray-600" data-translate="address-line-1">
+											11166 Fairfax Blvd, 500
+										</p>
+										<p class="text-gray-600" data-translate="address-line-2">
+											Fairfax, VA 22030, USA
+										</p>
+									</div>
+								</div>
+
+								<div class="flex items-start space-x-4">
+									<div
+										class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0"
+									>
+										<i class="bi bi-linkedin text-brand-orange text-xl"></i>
+									</div>
+									<div>
+										<h4
+											class="font-semibold text-brand-blue mb-1"
+											data-translate="linkedin-label"
+										>
+											Follow Us on LinkedIn
+										</h4>
+										<a
+											href="https://linkedin.com/company/gbas-aviation"
+											target="_blank"
+											class="text-brand-orange hover:text-brand-orange-light transition-colors"
+											data-translate="linkedin-link"
+										>
+											LinkedIn Profile
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Contact Form -->
+					<div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+						<form
+							action="https://formsubmit.co/youaifms@gmail.com"
+							method="POST"
+							class="space-y-6"
+						>
+							<div>
+								<label
+									class="block text-sm font-semibold text-brand-blue mb-2"
+									data-translate="name-label"
+								>
+									Name
+								</label>
+								<input
+									type="text"
+									name="name"
+									class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none"
+									required
+								/>
+							</div>
+
+							<div>
+								<label
+									class="block text-sm font-semibold text-brand-blue mb-2"
+									data-translate="company-label"
+								>
+									Company
+								</label>
+								<input
+									type="text"
+									name="company"
+									class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none"
+									required
+								/>
+							</div>
+
+							<div>
+								<label
+									class="block text-sm font-semibold text-brand-blue mb-2"
+									data-translate="email-label"
+								>
+									Email
+								</label>
+								<input
+									type="email"
+									name="email"
+									class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none"
+									required
+								/>
+							</div>
+
+							<div>
+								<label
+									class="block text-sm font-semibold text-brand-blue mb-2"
+									data-translate="subject-label"
+								>
+									Subject
+								</label>
+								<input
+									type="text"
+									name="subject"
+									class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none"
+									required
+								/>
+							</div>
+
+							<div>
+								<label
+									class="block text-sm font-semibold text-brand-blue mb-2"
+									data-translate="message-label"
+								>
+									Message
+								</label>
+								<textarea
+									rows="4"
+									name="message"
+									class="form-input w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none resize-none"
+									data-translate="message-placeholder"
+									placeholder="Tell us about your needs..."
+									required
+								></textarea>
+							</div>
+
+							<button
+								type="submit"
+								class="w-full bg-brand-orange text-white px-8 py-4 rounded-xl hover:bg-brand-orange-light transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+							>
+								<i class="bi bi-send mr-2"></i>
+								<span data-translate="send-message">Send Your Message</span>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="bg-gray-900 text-white py-16">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<!-- Company Info -->
+					<div class="lg:col-span-2">
+						<img
+							src="assets/Logo.svg"
+							alt="Global Business and Aviation Services"
+							class="h-20 w-auto mb-4 filter brightness-0 invert"
+						/>
+						<p class="text-gray-400 mb-6 max-w-md" data-translate="footer-description">
+							Global Business and Aviation Services (GBAS) - Delivering integrated solutions
+							for airlines, airports, hotels, and service facilities worldwide.
+						</p>
+						<div class="flex space-x-4">
+							<a
+								href="#"
+								class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center hover:bg-brand-orange-light transition-colors"
+							>
+								<i class="bi bi-linkedin text-white"></i>
+							</a>
+							<a
+								href="#"
+								class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center hover:bg-brand-orange-light transition-colors"
+							>
+								<i class="bi bi-twitter text-white"></i>
+							</a>
+							<a
+								href="#"
+								class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center hover:bg-brand-orange-light transition-colors"
+							>
+								<i class="bi bi-facebook text-white"></i>
+							</a>
+							<a
+								href="#"
+								class="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center hover:bg-brand-orange-light transition-colors"
+							>
+								<i class="bi bi-instagram text-white"></i>
+							</a>
+						</div>
+					</div>
+
+					<!-- Services -->
+					<div>
+						<h3 class="text-lg font-bold mb-4" data-translate="footer-services">Services</h3>
+						<ul class="space-y-2">
+							<li>
+								<a
+									href="#"
+									class="text-gray-400 hover:text-brand-orange transition-colors"
+									data-translate="footer-service-1"
+									>HR Management</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-gray-400 hover:text-brand-orange transition-colors"
+									data-translate="footer-service-2"
+									>Technology Solutions</a
+								>
+							</li>
+							<li>
+								<a
+									href="#"
+									class="text-gray-400 hover:text-brand-orange transition-colors"
+									data-translate="footer-service-3"
+									>Consulting & Training</a
+								>
+							</li>
+							<li>
+								<a
+									href="#finderjet"
+									class="text-gray-400 hover:text-brand-orange transition-colors"
+									data-translate="footer-finderjet"
+									>FinderJet</a
+								>
+							</li>
+						</ul>
+					</div>
+
+					<!-- Contact -->
+					<div>
+						<h3 class="text-lg font-bold mb-4" data-translate="footer-contact">Contact</h3>
+						<ul class="space-y-3">
+							<li class="flex items-center text-gray-400">
+								<i class="bi bi-envelope mr-3 text-brand-orange"></i>
+								<span>info@gbasus.com</span>
+							</li>
+							<li class="flex items-center text-gray-400">
+								<i class="bi bi-geo-alt mr-3 text-brand-orange"></i>
+								<span data-translate="footer-location">Fairfax, Virginia, USA</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div
+					class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center"
+				>
+					<p class="text-gray-400 text-sm" data-translate="footer-copyright">
+						© 2024 Global Business and Aviation Services (GBAS). All rights reserved.
+					</p>
+					<div class="flex space-x-6 mt-4 md:mt-0">
+						<a
+							href="#"
+							class="text-gray-400 hover:text-brand-orange text-sm transition-colors"
+							data-translate="footer-privacy"
+							>Privacy Policy</a
+						>
+						<a
+							href="#"
+							class="text-gray-400 hover:text-brand-orange text-sm transition-colors"
+							data-translate="footer-terms"
+							>Terms of Service</a
+						>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/script.js"></script>
+	</body>
+</html>
